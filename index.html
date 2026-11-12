@@ -147,4 +147,31 @@ function drawGame() {
         headY < 0 ||
         headX >= canvasSize ||
         headY >= canvasSize ||
-        collision
+        collision(newHead, snake)
+    ) {
+        clearInterval(game);
+        alert("Game Over! Score: " + score);
+        location.reload();
+        return;
+    }
+
+    snake.unshift(newHead);
+}
+
+function collision(head, snakeBody) {
+    for (let i = 0; i < snakeBody.length; i++) {
+        if (
+            head.x === snakeBody[i].x &&
+            head.y === snakeBody[i].y
+        ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const game = setInterval(drawGame, 120);
+</script>
+
+</body>
+</html>
